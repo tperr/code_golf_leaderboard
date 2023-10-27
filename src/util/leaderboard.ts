@@ -1,5 +1,6 @@
 import axios from "axios";
 import golfers from "../golfers";
+import { langs, problems } from "../problems";
 
 export type Solution = {
   bytes: number;
@@ -19,6 +20,14 @@ export interface LeaderboardProps {
 export type LeaderboardEntry = {
   golfer: string;
   chars: number;
+};
+
+export type ScoredSolution = Solution & {
+  points: number;
+};
+
+export type AggregateLeaderboardEntry = Omit<LeaderboardEntry, "chars"> & {
+  points: number;
 };
 
 export function fetchLeaderboardEntries(
@@ -45,4 +54,27 @@ export function fetchLeaderboardEntries(
     })
     .then((map) => Array.from(map.values()))
     .then((arr) => arr.sort((a, b) => a.chars - b.chars));
+}
+
+const baseScore = 8;
+
+export function fetchAggregateLeaderboardEntries(): Promise<ScoredSolution[]> {
+  return Promise.all(
+    langs
+      .map((lang) =>
+        problems.map((hole) => fetchLeaderboardEntries(hole, lang))
+      )
+      .flat()
+  ).then((data) =>
+    data
+      .map((arr) =>
+        arr.slice(0, 3).map((val, idx): ScoredSolution => {
+          return {
+            ...val,
+            points: baseScore / Math.pow(2, idx),
+          };
+        })
+      )
+      .flat()
+  );
 }

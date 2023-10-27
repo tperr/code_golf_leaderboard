@@ -1,19 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { langs, problems } from "./problems";
-import { LeaderboardEntry, fetchLeaderboardEntries } from "./util/leaderboard";
 import { Text } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Table from "./Table";
-import type { Solution } from "./util/leaderboard";
+import {
+  fetchAggregateLeaderboardEntries,
+  type AggregateLeaderboardEntry,
+  type ScoredSolution,
+} from "./util/leaderboard";
 import { useMemo } from "react";
-
-export type ScoredSolution = Solution & {
-  points: number;
-};
-
-export type AggregateLeaderboardEntry = Omit<LeaderboardEntry, "chars"> & {
-  points: number;
-};
 
 const columnHelper = createColumnHelper<AggregateLeaderboardEntry>();
 
@@ -30,29 +25,6 @@ const columns = [
     },
   }),
 ];
-
-const baseScore = 8;
-
-function solutionsQueryFn(): Promise<ScoredSolution[]> {
-  return Promise.all(
-    langs
-      .map((lang) =>
-        problems.map((hole) => fetchLeaderboardEntries(hole, lang))
-      )
-      .flat()
-  ).then((data) =>
-    data
-      .map((arr) =>
-        arr.slice(0, 3).map((val, idx): ScoredSolution => {
-          return {
-            ...val,
-            points: baseScore / Math.pow(2, idx),
-          };
-        })
-      )
-      .flat()
-  );
-}
 
 function filterBestOverall(
   data: ScoredSolution[]
@@ -91,7 +63,7 @@ type AggregateLeaderboardProps = { hole: string; lang: string };
 function AggregateLeaderboard({ hole, lang }: AggregateLeaderboardProps) {
   const { isPending, data, isSuccess } = useQuery({
     queryKey: [problems, langs],
-    queryFn: solutionsQueryFn,
+    queryFn: fetchAggregateLeaderboardEntries,
   });
 
   const filteredData = useMemo(() => {
