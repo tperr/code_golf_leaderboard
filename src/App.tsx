@@ -15,9 +15,12 @@ function App() {
     },
     [setProblem]
   );
-  const onLanguageChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value);
-  }, []);
+  const onLanguageChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      setLanguage(e.target.value);
+    },
+    [setLanguage]
+  );
 
   const problemOptions = useMemo(
     () => problems.map((val) => <option value={val}>{val}</option>),
