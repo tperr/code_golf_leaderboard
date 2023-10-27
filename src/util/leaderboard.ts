@@ -19,17 +19,17 @@ export interface LeaderboardProps {
 export type LeaderboardEntry = {
   golfer: string;
   chars: number;
-  submitted: string;
 };
+
 export function fetchLeaderboardEntries(
   hole: string,
   lang: string
-): Promise<LeaderboardEntry[]> {
+): Promise<Solution[]> {
   return axios
     .get(`https://code.golf/api/solutions-log?hole=${hole}&lang=${lang}`)
     .then((res) => res.data)
     .then((data: Solution[]) => {
-      const solns: Map<string, LeaderboardEntry> = new Map();
+      const solns: Map<string, Solution> = new Map();
       for (const entry of data) {
         if (!golfers.has(entry.golfer)) {
           continue;

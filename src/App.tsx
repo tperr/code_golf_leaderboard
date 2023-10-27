@@ -1,13 +1,12 @@
 import { Center, HStack, Heading, Select, VStack } from "@chakra-ui/react";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import Leaderboard from "./Leaderboard";
-
-const problems = ["fibonacci", "fizz-buzz"];
-const langs = ["java", "python", "c", "cpp"];
+import { langs, problems } from "./problems";
+import AggregateLeaderboard from "./AggregateLeaderboard";
 
 function App() {
-  const [problem, setProblem] = useState(problems[0]);
-  const [language, setLanguage] = useState(langs[0]);
+  const [problem, setProblem] = useState("all");
+  const [language, setLanguage] = useState("all");
 
   const onProblemChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -23,19 +22,48 @@ function App() {
   );
 
   const problemOptions = useMemo(
-    () => problems.map((val) => <option value={val}>{val}</option>),
+    () =>
+      problems
+        .map((val) => (
+          <option key={val} value={val}>
+            {val}
+          </option>
+        ))
+        .concat([
+          <option key={"all"} value={"all"}>
+            All
+          </option>,
+        ]),
     []
   );
   const langOptions = useMemo(
     () =>
-      langs.map((val) => {
-        // Make sentence case
-        const name = val.charAt(0).toUpperCase() + val.substring(1);
+      langs
+        .map((val) => {
+          // Make sentence case
+          const name = val.charAt(0).toUpperCase() + val.substring(1);
 
-        return <option value={val}>{name}</option>;
-      }),
+          return (
+            <option key={val} value={val}>
+              {name}
+            </option>
+          );
+        })
+        .concat([
+          <option key={"all"} value={"all"}>
+            All
+          </option>,
+        ]),
     []
   );
+
+  const leaderboard = useMemo(() => {
+    if (problem === "all" || language === "all") {
+      return <AggregateLeaderboard hole={problem} lang={language} />;
+    } else {
+      return <Leaderboard hole={problem} language={language} />;
+    }
+  }, [language, problem]);
 
   return (
     <Center>
@@ -49,7 +77,7 @@ function App() {
             {langOptions}
           </Select>
         </HStack>
-        <Leaderboard hole={problem} language={language} />
+        {leaderboard}
       </VStack>
     </Center>
   );
