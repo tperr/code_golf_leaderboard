@@ -1,3 +1,26 @@
-const golfers = new Set(["tperr"]);
+const golfers = new Set([
+  "BraedenMooreDev",
+  "carlsoncorey16",
+  "HugoHead",
+  "jccummi1",
+  "ped-renguin",
+  "aevykt",
+  "ACoderPerson",
+  "ibratcher",
+  "I<3Golf",
+  "Brayden1000",
+  "treex23",
+  "DevinJFarmer",
+  "Player01osu",
+  "audrey314",
+  "rcklemm",
+  "KayleeBrinkman",
+  "DaDarkWizard",
+  "Paulbadour",
+  "bbnumber2",
+  "MistMech",
+  "Mch47",
+  "tperr",
+]);
 
 export default golfers;
