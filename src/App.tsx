@@ -1,7 +1,7 @@
 import { Center, HStack, Heading, Select, VStack } from "@chakra-ui/react";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import Leaderboard from "./Leaderboard";
-import { langs, problems } from "./problems";
+import { bonus_problems, langs, problems } from "./problems";
 import AggregateLeaderboard from "./AggregateLeaderboard";
 
 function App() {
@@ -23,37 +23,32 @@ function App() {
 
   const problemOptions = useMemo(
     () =>
-      problems
-        .map((val) => (
+      ["all", ...problems, ...bonus_problems].map((val) => {
+        const name = val
+          .split("-")
+          .map((val) => val.charAt(0).toUpperCase() + val.substring(1))
+          .join(" ");
+
+        return (
           <option key={val} value={val}>
-            {val}
+            {name}
           </option>
-        ))
-        .concat([
-          <option key={"all"} value={"all"}>
-            All
-          </option>,
-        ]),
+        );
+      }),
     []
   );
   const langOptions = useMemo(
     () =>
-      langs
-        .map((val) => {
-          // Make sentence case
-          const name = val.charAt(0).toUpperCase() + val.substring(1);
+      ["all", ...langs].map((val) => {
+        // Make sentence case
+        const name = val.charAt(0).toUpperCase() + val.substring(1);
 
-          return (
-            <option key={val} value={val}>
-              {name}
-            </option>
-          );
-        })
-        .concat([
-          <option key={"all"} value={"all"}>
-            All
-          </option>,
-        ]),
+        return (
+          <option key={val} value={val}>
+            {name}
+          </option>
+        );
+      }),
     []
   );
 
