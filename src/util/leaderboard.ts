@@ -46,8 +46,11 @@ export function fetchLeaderboardEntries(
           continue;
         }
         const date_cur = new Date(entry.submitted).getTime();
-        const date_next = new Date(entry.submitted).getTime();
-        if (code_golf_start > date_cur || date_cur < date_next) {
+        const selected_entry = solns.get(entry.golfer);
+        if (
+          code_golf_start > date_cur ||
+          (selected_entry && selected_entry.chars < entry.chars)
+        ) {
           continue;
         }
         solns.set(entry.golfer, entry);
