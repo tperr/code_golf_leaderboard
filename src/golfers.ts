@@ -20,6 +20,7 @@ const golfers = new Set([
   "bbnumber2",
   "MistMech",
   "Mch47",
+  "gthayden23",
   "tperr",
 ]);
 
