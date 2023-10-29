@@ -21,6 +21,9 @@ const golfers = new Set([
   "MistMech",
   "Mch47",
   "gthayden23",
+  "PaulBadour",
+  "pjlafren",
+  "TanTanACF",
   "tperr",
 ]);
 
