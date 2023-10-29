@@ -31,6 +31,7 @@ export type AggregateLeaderboardEntry = Omit<LeaderboardEntry, "chars"> & {
 };
 
 const code_golf_start = new Date("10/28/2023, 7:30:00 PM").getTime();
+const code_golf_end = new Date("10/29/2023, 8:00:00 PM").getTime();
 
 export function fetchLeaderboardEntries(
   hole: string,
@@ -49,6 +50,7 @@ export function fetchLeaderboardEntries(
         const selected_entry = solns.get(entry.golfer);
         if (
           code_golf_start > date_cur ||
+          code_golf_end < date_cur ||
           (selected_entry && selected_entry.chars < entry.chars)
         ) {
           continue;
