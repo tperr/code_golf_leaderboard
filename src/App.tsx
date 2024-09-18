@@ -63,7 +63,7 @@ function App() {
   return (
     <Center>
       <VStack>
-        <Heading>Monster Mini Code Golf Leaderboard</Heading>
+        <Heading>Monster Mini Code Golf Leaderboard 2.0</Heading>
         <HStack>
           <Select value={problem} onChange={onProblemChange}>
             {problemOptions}
