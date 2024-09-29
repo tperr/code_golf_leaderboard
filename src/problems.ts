@@ -1,7 +1,7 @@
 export const problems = [
-
+  "fizz-buzz",
 ];
-export const bonus_problems = [];
+export const bonus_problems = ["game-of-life"];
 
 
 export const problems_2023 = [
