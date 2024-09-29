@@ -22,3 +22,7 @@ dist-ssr/
 *.njsproj
 *.sln
 *.sw?
+
+# don't want to make this public
+banweb.txt
+classinfo.txt
