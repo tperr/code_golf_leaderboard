@@ -30,8 +30,8 @@ export type AggregateLeaderboardEntry = Omit<LeaderboardEntry, "chars"> & {
   points: number;
 };
 
-// const code_golf_start = new Date("10/4/2024, 7:15:00 PM").getTime();
-const code_golf_start = new Date("9/27/2024, 7:15:00 PM").getTime();
+const code_golf_start = new Date("10/4/2024, 7:15:00 PM").getTime();
+// const code_golf_start = new Date("9/27/2024, 7:15:00 PM").getTime();
 const code_golf_end = new Date("10/5/2024, 8:00:00 PM").getTime();
 
 export function fetchLeaderboardEntries(

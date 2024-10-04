@@ -1,7 +1,16 @@
 export const problems = [
-  "fizz-buzz",
+  "leap-years",
+  "prime-numbers-long",
+  "fractions",
+  "foo-fizz-buzz-bar",
+  "christmas-trees",
+  "rule-110",
+  "lucky-numbers",
+  "sierpiński-triangle",
+  "odious-numbers",
+  "united-states"
 ];
-export const bonus_problems = ["game-of-life"];
+export const bonus_problems = ["maze"];
 
 
 export const problems_2023 = [
