@@ -16,6 +16,7 @@ const golfers = new Set([
     "TheBrokenRail",
     "PaulBadour",
     "rohith-kola",
+    "evanjaco",
 ]);
 
 export default golfers;
