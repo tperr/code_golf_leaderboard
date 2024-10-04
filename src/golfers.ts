@@ -12,7 +12,7 @@ const golfers = new Set([
     "robbyj1388",
     "onsagere",
     "jccummi1",
-    "sanjeev29".
+    "sanjeev29",
     "AndrewKentavr",
     "spacecatplayz",
     "TheBrokenRail",
