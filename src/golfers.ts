@@ -1,6 +1,4 @@
 const golfers = new Set([
-    "tperr",
-    "HPWiz",
     "gthayden23",
     "Colinwat",
     "RaVoTTi",
